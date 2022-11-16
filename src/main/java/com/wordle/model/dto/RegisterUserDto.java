@@ -1,4 +1,4 @@
-package com.wordle.model;
+package com.wordle.model.dto;
 
 import javax.validation.constraints.NotEmpty;
 public class RegisterUserDto {
