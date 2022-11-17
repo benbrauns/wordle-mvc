@@ -19,6 +19,7 @@ import javax.validation.Valid;
 /**
  * Controller to authenticate users.
  */
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 public class AuthenticationController {
 

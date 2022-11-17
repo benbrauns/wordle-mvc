@@ -51,11 +51,10 @@ public class GuessController {
             i++;
         }
         for (LetterDto letter : guess.getLetters()) {
-            if (!letter.getResult().isBlank()) { continue; }
             int index = solution.indexOf(letter.getLetter().toUpperCase(Locale.ROOT));
-            if (index == -1) {
+            if (index == -1 && letter.getResult().isBlank()) {
                 letter.setResult("black");
-            } else {
+            } else if (letter.getResult().isBlank()) {
                 letter.setResult("yellow");
                 solution.replace(index, index + 1, "-");
             }
