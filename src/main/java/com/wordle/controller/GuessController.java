@@ -6,10 +6,7 @@ import com.wordle.model.Solution;
 import com.wordle.model.User;
 import com.wordle.model.dto.GuessDto;
 import com.wordle.model.dto.LetterDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -19,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/game/guess")
 public class GuessController {
 

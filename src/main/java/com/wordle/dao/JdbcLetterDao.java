@@ -21,7 +21,7 @@ public class JdbcLetterDao implements LetterDao{
     @Override
     public List<LetterDto> getLetterByGuessId(Integer guessId) {
         String sql =
-                "SELECT position, result " +
+                "SELECT position, letter, result " +
                 "FROM letter " +
                 "WHERE guess_id = ? " +
                 "ORDER BY position;";
@@ -50,6 +50,7 @@ public class JdbcLetterDao implements LetterDao{
             LetterDto letter = new LetterDto();
             letter.setPosition(rowSet.getInt("position"));
             letter.setLetter(rowSet.getString("letter"));
+            letter.setResult(rowSet.getString("result"));
             return letter;
         } catch (Exception e) {
             Logger.log(e);

@@ -5,6 +5,7 @@ import com.wordle.dao.UserDao;
 import com.wordle.model.Game;
 import com.wordle.model.dto.GameDto;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/game")
 public class GameController {
 
