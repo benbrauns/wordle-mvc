@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 /**
  * Controller to authenticate users.
  */
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = {"http://127.0.0.1:5500", "https://benbrauns.github.io"})
 @RestController
 public class AuthenticationController {
 
@@ -54,6 +55,15 @@ public class AuthenticationController {
         if (!userDao.create(newUser.getUsername(), newUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User registration failed.");
         }
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public UUID create() {
+        UUID username = UUID.randomUUID();
+        if (userDao.create(username.toString(), "a")) {
+            return username;
+        }
+        return null;
     }
 
 }

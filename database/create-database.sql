@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS wordle_user, game, guess, letter, letter_result CASCADE;
+DROP TABLE IF EXISTS wordle_user, game, solution, guess, letter, letter_result CASCADE;
 
 CREATE TABLE wordle_user (
 	user_id serial,
@@ -8,12 +8,19 @@ CREATE TABLE wordle_user (
 	CONSTRAINT UQ_username UNIQUE (username)
 );
 
+CREATE TABLE solution (
+	game_date date UNIQUE NOT NULL,
+	word VARCHAR(5) NOT NULL,
+	CONSTRAINT PK_solution PRIMARY KEY (game_date)
+);
+
 CREATE TABLE game (
-	game_id serial,
+	game_id serial UNIQUE,
 	user_id int,
-	game_date date,
-	CONSTRAINT PK_game PRIMARY KEY (game_id),
-	CONSTRAINT FK_game_user_id FOREIGN KEY (user_id) REFERENCES wordle_user(user_id)
+	solution date,
+	CONSTRAINT PK_game PRIMARY KEY (user_id, solution),
+	CONSTRAINT FK_game_user_id FOREIGN KEY (user_id) REFERENCES wordle_user(user_id),
+	CONSTRAINT FK_game_solution FOREIGN KEY (solution) REFERENCES solution(game_date)
 );
 
 CREATE TABLE guess (
@@ -31,6 +38,7 @@ CREATE TABLE letter_result (
 
 CREATE TABLE letter(
 	guess_id int NOT NULL,
+	letter CHAR(1) NOT NULL,
 	position int NOT NULL,
 	result VARCHAR(10),
 	CONSTRAINT PK_letter PRIMARY KEY (guess_id, position),
@@ -38,9 +46,9 @@ CREATE TABLE letter(
 	CONSTRAINT FK_letter FOREIGN KEY (result) REFERENCES letter_result(description)
 );
 
-
 INSERT INTO letter_result (description)
-VALUES
-	('BLACK'),
-	('YELLOW'),
-	('GREEN');
+VALUES ('green'), ('yellow'), ('black');
+
+INSERT INTO solution (game_date, word)
+VALUES (CURRENT_DATE, 'IRATE');
+

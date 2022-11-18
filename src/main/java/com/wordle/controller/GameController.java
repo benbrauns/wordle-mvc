@@ -14,7 +14,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = {"http://127.0.0.1:5500", "https://benbrauns.github.io"})
 @RequestMapping("/game")
 public class GameController {
 

@@ -11,7 +11,7 @@
 	<groupId>com.</groupId>
 	<artifactId>wordle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Wodle</name>
+	<name>wordle</name>
 	<description>Wordle MVC using Spring Boot</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -78,6 +78,17 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.4</version>
+				<configuration>
+					<appName>wordle</appName>
+					<processTypes>
+						<web>java $JAVA_OPTS -Dserver.port=$PORT -cp target/classes:target/dependency/* com.wordle.WordleApplication</web>
+					</processTypes>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
